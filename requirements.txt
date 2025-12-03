@@ -1,0 +1,9 @@
+flask
+flask-sqlalchemy
+werkzeug
+pandas
+pdfplumber
+google-generativeai
+python-docx
+Pillow
+pytesseract
