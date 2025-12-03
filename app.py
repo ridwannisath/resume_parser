@@ -50,7 +50,7 @@ class Candidate(db.Model):
     year_passing = db.Column(db.String(20))
     location = db.Column(db.String(100)) # Gemini often finds location
     upload_date = db.Column(db.DateTime, default=datetime.utcnow)
-
+    pass
 # ==========================================
 # PART 1: TRADITIONAL REGEX LOGIC (FOR PDF/DOCX)
 # ==========================================
@@ -237,6 +237,9 @@ def parse_with_gemini(file_path):
 # ==========================================
 # ROUTES
 # ==========================================
+with app.app_context():
+    db.create_all()
+
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -341,4 +344,5 @@ def export_json():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+
     app.run(debug=True)
