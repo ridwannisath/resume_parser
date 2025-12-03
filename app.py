@@ -239,6 +239,7 @@ def parse_with_gemini(file_path):
 # ==========================================
 with app.app_context():
     db.create_all()
+    print("Database tables created successfully!")
 
 
 def allowed_file(filename):
@@ -346,3 +347,4 @@ if __name__ == '__main__':
         db.create_all()
 
     app.run(debug=True)
+
