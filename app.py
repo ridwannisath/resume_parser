@@ -207,8 +207,9 @@ def parse_with_gemini(file_path):
         - Email
         - College
         - Degree 
-        - Department 
-        - Location 
+        - Department
+        - district
+        - state
         - Passed Out (Year of graduation)
         If a value is not found, use "Not Specified".
         """
@@ -228,7 +229,8 @@ def parse_with_gemini(file_path):
             "Degree": data.get("Degree", "Not Specified"),
             "Department": data.get("Department", "Not Specified"),
             "Year": data.get("Passed Out", "Not Specified"),
-            "Location": data.get("Location", "Not Specified")
+            "district": data.get("Location", "Not Specified"),
+            "State": data.get("State", "Not Specified")
         }
     except Exception as e:
         print(f"Gemini Error: {e}")
@@ -286,8 +288,8 @@ def upload_file():
                     college=data['College'],
                     degree=data['Degree'],
                     department=data['Department'],
-                    state=data.get('State', ''),
                     district=data.get('District', ''),
+                    state=data.get('State', ''), 
                     year_passing=data['Year'],
                 )
                 db.session.add(new_candidate)
@@ -347,4 +349,5 @@ if __name__ == '__main__':
         db.create_all()
 
     app.run(debug=True)
+
 
