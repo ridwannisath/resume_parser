@@ -57,6 +57,10 @@ class Candidate(db.Model):
     district = db.Column(db.String(50))
     year_passing = db.Column(db.String(20))
     upload_date = db.Column(db.DateTime, default=datetime.utcnow)
+    
+with app.app_context():
+    db.create_all()
+    print("Database tables created successfully.")
 
 # ==========================================
 # PART 1: TRADITIONAL REGEX LOGIC (FOR PDF/DOCX)
@@ -433,3 +437,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
