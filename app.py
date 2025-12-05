@@ -17,26 +17,26 @@ from datetime import datetime
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'png', 'jpg', 'jpeg', 'webp'}
 
-
-# # --- LOAD API KEY FROM .env ---
-# from dotenv import load_dotenv
-# load_dotenv()
-
-# API_KEY = os.getenv("GOOGLE_API_KEY")
-
-# if not API_KEY:
-#     raise Exception("❌ GOOGLE_API_KEY not found. Please add it to .env file.")
-
-# genai.configure(api_key=API_KEY)
-
-os.environ["GOOGLE_API_KEY"] = "AIzaSyArqcgFOquKuDJcFpm0D_2kpJfv0kwOKbQ"
+# API Configuration
+# Note: In production, it is safer to use os.getenv("GOOGLE_API_KEY")
+os.environ["GOOGLE_API_KEY"] = "AIzaSyBXaj8Pyujc3b8UVv9VXlf_ts83WBF9rU0"
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel('gemini-2.5-flash')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resumes.db'
+
+# --- DATABASE CONFIGURATION (UPDATED FOR POSTGRESQL) ---
+# Get the URL from the environment (Render sets this) or use SQLite as a backup for local testing
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///resumes.db')
+
+# Fix for Render's URL format (postgres:// -> postgresql://)
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# -------------------------------------------------------
 
 db = SQLAlchemy(app)
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -58,9 +58,11 @@ class Candidate(db.Model):
     year_passing = db.Column(db.String(20))
     upload_date = db.Column(db.DateTime, default=datetime.utcnow)
     
+# --- CRITICAL: CREATE TABLES ON STARTUP ---
+# This ensures tables exist before any request is made
 with app.app_context():
     db.create_all()
-    print("Database tables created successfully.")
+    print("Database connected and tables verified.")
 
 # ==========================================
 # PART 1: TRADITIONAL REGEX LOGIC (FOR PDF/DOCX)
@@ -437,4 +439,3 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
