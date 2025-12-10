@@ -19,7 +19,7 @@ ALLOWED_EXTENSIONS = {'pdf', 'docx', 'png', 'jpg', 'jpeg', 'webp'}
 
 # API Configuration
 # Note: In production, it is safer to use os.getenv("GOOGLE_API_KEY")
-os.environ["GOOGLE_API_KEY"] = "AIzaSyBXaj8Pyujc3b8UVv9VXlf_ts83WBF9rU0"
+os.environ["GOOGLE_API_KEY"] = "AIzaSyCtzhOhQbCldyfmA8JRO241L4pFZB6vtsE"
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel('gemini-2.5-flash')
 
@@ -439,3 +439,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
