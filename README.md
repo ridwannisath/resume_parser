@@ -6,9 +6,13 @@
 
 ---
 
+## // ABOUT
+
+Welcome to **Resume Parser Core**, a high-velocity data extraction engine designed to transform unstructured resume data into structured digital intelligence. By combining **Deterministic Algorithms (Regex)** with **Generative Neural Networks (Google Gemini AI)**, this system automates the parsing of documents (PDF, DOCX) and visual inputs (IMG, PNG, JPG) with high precision.
+
 ## // MISSION BRIEFING
 
-Welcome to the **Resume Parser Core**, a high-velocity data extraction engine designed to transmute unstructured document data into crystalline intelligence. Leveraging the symbiotic union of **Deterministic Algorithms (Regex)** and **Generative Neural Networks (Gemini AI)**, this system ingests biological profile documents (Resumes) and outputs structured digital entities.
+The core objective is to streamline the recruitment pipeline by transmuting diverse candidate profiles into crystalline, actionable data. The system handles the entire lifecycle: ingestion, parsing, duplication checks, and visualization.
 
 ## // SYSTEM CAPABILITIES
 
