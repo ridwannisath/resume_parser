@@ -18,8 +18,8 @@ UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'pdf', 'docx', 'png', 'jpg', 'jpeg', 'webp'}
 
 # API Configuration
-# Note: In production, it is safer to use os.getenv("GOOGLE_API_KEY")
-os.environ["GOOGLE_API_KEY"] = "AIzaSyCtzhOhQbCldyfmA8JRO241L4pFZB6vtsE"
+# Prioritize environment variable, fallback to hardcoded key for local dev
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY", "AIzaSyCtzhOhQbCldyfmA8JRO241L4pFZB6vtsE")
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel('gemini-2.5-flash')
 
