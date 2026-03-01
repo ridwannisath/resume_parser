@@ -42,7 +42,7 @@ To deploy the system on your local node, execute the following command directive
 
 ### 1. CLONE_REPOSITORY
 ```bash
-git clone <secure-uplink-url>
+git clone https://github.com/ridwannisath/resume_parser.git
 cd resume_parser
 ```
 
